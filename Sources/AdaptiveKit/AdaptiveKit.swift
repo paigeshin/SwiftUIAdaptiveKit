@@ -29,9 +29,26 @@ public enum BaseScreen {
 
 public extension View {
 
-    func adaptiveFontSize(_ fontSize: CGFloat) -> some View {
-        self
-            .font(.system(size: (fontSize * screenHeight) / standardHeight))
+    func adaptiveFontSize(base: BaseScreen = .height, _ fontSize: CGFloat) -> some View {
+        if base == .width {
+            return self
+                .font(.system(size: (fontSize * screenWidth) / standardWidth))
+        } else {
+            return self
+                .font(.system(size: (fontSize * screenHeight) / standardHeight))
+        }
+
+    }
+    
+    func adaptiveFontSize(base: BaseScreen = .height, customFont: String, _ fontSize: CGFloat) -> some View {
+        if base == .width {
+            return self
+                .font(.custom(customFont, size: (fontSize * screenWidth) / standardWidth))
+        } else {
+            return self
+                .font(.custom(customFont, size: (fontSize * screenHeight) / standardHeight))
+        }
+
     }
     
     func adaptivePadding(base: BaseScreen = .height, _ edge: Edge.Set, _ value: CGFloat) -> some View {
