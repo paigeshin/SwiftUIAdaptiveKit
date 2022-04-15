@@ -88,7 +88,7 @@ View Modifier proportionally resizing based on the height by default
     .adaptivePadding(base: .width, 16)
 ```
 
-### `adaptiveLineSpacing()`
+### `.adaptiveLineSpacing()`
 
 View Modifier proportionally resizing based on the height by default
 
@@ -97,7 +97,7 @@ View Modifier proportionally resizing based on the height by default
         .adaptiveLineSpacing(4)
 ```
 
-### `adaptiveHeight()`
+### `.adaptiveHeight()`
 
 View Modifier proportionally resizing based on the height
 
@@ -108,7 +108,7 @@ View Modifier proportionally resizing based on the height
     .adaptiveHeight(480)
 ```
 
-### `adapativeWidth()`
+### `.adapativeWidth()`
 
 View Modifier proportionally resizing based on the width
 
@@ -119,7 +119,7 @@ View Modifier proportionally resizing based on the width
     .adaptiveWidth(480)
 ```
 
-### `adaptiveFrame()`
+### `.adaptiveFrame()`
 
 View Modifier proportionally resizing based on the width
 
