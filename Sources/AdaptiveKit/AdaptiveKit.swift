@@ -1,51 +1,34 @@
 import SwiftUI
 
-/// https://www.ios-resolution.com/
-
-fileprivate var standardHeight: CGFloat = 844
-fileprivate var standardWidth: CGFloat = 390
+fileprivate var screenWidth: CGFloat = 0
+fileprivate var screenHeight: CGFloat = 0
+fileprivate var standardHeight: CGFloat = 0
+fileprivate var standardWidth: CGFloat = 0
 
 
 public struct AdaptiveKit {
     
     private init() {}
     
-    public static func initialize(device: AppleDevice) {
-        standardWidth = device.logicalWidth
-        standardHeight = device.logicalHeight
-    }
-    
-    public static func initialize(width: CGFloat, height: CGFloat) {
-        standardWidth = width
-        standardHeight = height
+    public static func initialize(currentScreenWidth: CGFloat,
+                                  currentScreenHeight: CGFloat,
+                                  baseWidth: CGFloat,
+                                  baseHeight: CGFloat) {
+        screenWidth = currentScreenWidth
+        screenHeight = currentScreenHeight
+        standardWidth = baseWidth
+        standardHeight = baseHeight
     }
     
 }
 
-enum BaseScreen {
+public enum BaseScreen {
     case width
     case height
 }
 
-#if !os(macOS)
 public extension View {
-    
-    var screenWidth: CGFloat {
-        #if os(iOS)
-        UIScreen.main.bounds.width
-        #elseif os(watchOS)
-        WKInterfaceDevice.current().screenBounds.width
-        #endif
-    }
-    
-    var screenHeight: CGFloat {
-        #if os(iOS)
-        UIScreen.main.bounds.height
-        #elseif os(watchOS)
-        WKInterfaceDevice.current().screenBounds.height
-        #endif
-    }
-    
+
     func adaptiveFontSize(_ fontSize: CGFloat) -> some View {
         self
             .font(.system(size: (fontSize * screenHeight) / standardHeight))
@@ -111,4 +94,3 @@ public extension View {
     }
     
 }
-#endif
