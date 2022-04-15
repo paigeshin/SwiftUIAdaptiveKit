@@ -41,10 +41,91 @@ This example is now initializing with 375 width and 812 height.
 375 width and 812 height are the size of iPhone 13 mini. 
 If you received a design based on the iphone 13 mini, do this. 
 
+# Warning
+
+If you want to use this 
+
 # Examples
 
 ### `.adaptiveFontSize()`
 
-```swift
+View Modifier proportionally resizing based on the height by default
 
+```swift
+Text("Hello")
+    .adaptiveFontSize(16)
+    
+Text("Hello")
+    .adaptiveFontSize(customFont: "Futura", 16)
+    
+Text("Hello")
+    .adaptiveFontSize(base: .width, 16) // You can change base. Default is height 
+```
+
+### `adaptiveSpacing()`
+
+This is a function. Proportionally resizing based on the height by default
+
+```swift
+    VStack(spacing: adaptiveSpacing(8)) {
+        
+            
+    }
+    HStack(spacing: adaptiveSpacing(base: .width, 7)) {
+        
+    }
+```
+
+### `.adaptivePadding()`
+
+View Modifier proportionally resizing based on the height by default
+
+```swift
+    VStack {
+    }
+    .adaptivePadding(36)
+    .adaptivePadding(.top, 24)
+    .adaptivePadding(base: .width, 16)
+```
+
+### `adaptiveLineSpacing()`
+
+View Modifier proportionally resizing based on the height by default
+
+```swift
+    Text("HelloWorld\nHelloWorld")
+        .adaptiveLineSpacing(4)
+```
+
+### `adaptiveHeight()`
+
+View Modifier proportionally resizing based on the height
+
+```swift
+    VStack {
+            
+    }
+    .adaptiveHeight(480)
+```
+
+### `adapativeWidth()`
+
+View Modifier proportionally resizing based on the width
+
+```swift
+    VStack {
+            
+    }
+    .adaptiveWidth(480)
+```
+
+### `adaptiveFrame()`
+
+View Modifier proportionally resizing based on the width
+
+```swift
+    VStack {
+        
+    }
+    .adaptiveFrame(base: .width, width: 480, height: 240, alignment: .leading)
 ```
