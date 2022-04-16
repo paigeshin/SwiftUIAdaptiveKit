@@ -27,87 +27,120 @@ public enum BaseScreen {
     case height
 }
 
+// MARK: GET VIEW
 public extension View {
-
+    
     func adaptiveFontSize(base: BaseScreen = .height, _ fontSize: CGFloat) -> some View {
-        if base == .width {
-            return self
-                .font(.system(size: (fontSize * screenWidth) / standardWidth))
-        } else {
-            return self
-                .font(.system(size: (fontSize * screenHeight) / standardHeight))
-        }
-
+        self
+            .font(.system(size: calculateResizing(base: base, fontSize)))
     }
     
     func adaptiveFontSize(base: BaseScreen = .height, customFont: String, _ fontSize: CGFloat) -> some View {
-        if base == .width {
-            return self
-                .font(.custom(customFont, size: (fontSize * screenWidth) / standardWidth))
-        } else {
-            return self
-                .font(.custom(customFont, size: (fontSize * screenHeight) / standardHeight))
-        }
-
+        self
+            .font(.custom(customFont, size: calculateResizing(base: base, fontSize)))
     }
     
     func adaptivePadding(base: BaseScreen = .height, _ edge: Edge.Set, _ value: CGFloat) -> some View {
-        if base == .width {
-            return self
-                .padding(edge, (value * screenWidth) / standardWidth)
-        } else {
-            return self
-                .padding(edge, (value * screenHeight) / standardHeight)
-        }
+        self
+            .padding(edge, calculateResizing(base: base, value))
     }
     
     func adaptivePadding(base: BaseScreen = .height, _ value: CGFloat) -> some View {
-        if base == .width {
-            return self
-                .padding((value * screenWidth) / standardWidth)
-        } else {
-            return self
-                .padding((value * screenHeight) / standardHeight)
-        }
-        
-    }
-    
-    func adaptiveLineSpacing(_ value: CGFloat) -> some View {
         self
-            .lineSpacing((value * screenHeight) / standardHeight)
+            .padding(calculateResizing(base: base, value))
     }
     
-    func adaptiveHeight(_ value: CGFloat) -> some View {
+    func adaptiveLineSpacing(base: BaseScreen = .height, _ value: CGFloat) -> some View {
         self
-            .frame(height: (value * screenHeight) / standardHeight)
+            .lineSpacing(calculateResizing(base: base, value))
     }
     
-    func adaptiveWidth(_ value: CGFloat) -> some View {
+    func adaptiveWidth(base: BaseScreen = .width, _ value: CGFloat, alignment: Alignment = .center) -> some View {
         self
-            .frame(height: (value * screenWidth) / standardWidth)
+            .frame(width: calculateResizing(base: base, value),
+                   alignment: alignment)
     }
     
-    func adaptiveFrame(base: BaseScreen = .height, width: CGFloat, height: CGFloat, alignment: Alignment = .leading) -> some View {
-        if base == .width {
-            return self
-                .frame(width: (width * screenWidth) / standardWidth,
-                       height: (width * screenWidth) / standardWidth,
-                       alignment: alignment)
-        } else {
-            return self
-                .frame(width: (height * screenHeight) / standardHeight,
-                       height: (height * screenHeight) / standardHeight,
-                       alignment: alignment)
-        }
+    func adaptiveWidth(base: BaseScreen = .width,
+                       minWidth: CGFloat? = nil,
+                       idealWidth: CGFloat? = nil,
+                       maxWidth: CGFloat? = nil,
+                       alignment: Alignment = .center) -> some View {
+        self
+            .frame(minWidth: calculateResizing(base: base, minWidth ?? 0),
+                   idealWidth: calculateResizing(base: base, idealWidth ?? 0),
+                   maxWidth: calculateResizing(base: base, maxWidth ?? 0),
+                   alignment: alignment)
     }
+    
+    func adaptiveHeight(base: BaseScreen = .height, _ value: CGFloat, alignment: Alignment = .center) -> some View {
+        self
+            .frame(height: calculateResizing(base: base, value),
+                   alignment: alignment)
+    }
+    
+    func adaptiveHeight(base: BaseScreen = .height,
+                        minHeight: CGFloat? = nil,
+                        idealHeight: CGFloat? = nil,
+                        maxHeight: CGFloat? = nil,
+                        alignment: Alignment = .center) -> some View {
+        self
+            .frame(minHeight: calculateResizing(base: base, minHeight ?? 0),
+                   idealHeight: calculateResizing(base: base, idealHeight ?? 0),
+                   maxHeight: calculateResizing(base: base, maxHeight ?? 0),
+                   alignment: alignment)
+    }
+    
+    func adaptiveFrame(base: BaseScreen = .height, width: CGFloat, height: CGFloat, alignment: Alignment = .center) -> some View {
+        self
+            .frame(width: calculateResizing(base: base, width),
+                   height: calculateResizing(base: base, height),
+                   alignment: alignment)
+    }
+    
+    func adaptiveFrame(base: BaseScreen = .width,
+                       minWidth: CGFloat? = nil,
+                       idealWidth: CGFloat? = nil,
+                       maxWidth: CGFloat? = nil,
+                       minHeight: CGFloat? = nil,
+                       idealHeight: CGFloat? = nil,
+                       maxHeight: CGFloat? = nil,
+                       alignment: Alignment = .center) -> some View {
+        self
+            .frame(minWidth: calculateResizing(base: base, minWidth ?? 0),
+                   idealWidth: calculateResizing(base: base, idealWidth ?? 0),
+                   maxWidth: calculateResizing(base: base, maxWidth ?? 0),
+                   minHeight: calculateResizing(base: base, minHeight ?? 0),
+                   idealHeight: calculateResizing(base: base, idealHeight ?? 0),
+                   maxHeight: calculateResizing(base: base, maxHeight ?? 0),
+                   alignment: alignment)
+    }
+    
+
+    
+}
+
+// MARK: FUNCTIONS
+extension View {
     
     func adaptiveSpacing(base: BaseScreen = .height, _ value: CGFloat) -> CGFloat {
+        calculateResizing(base: base, value)
+    }
+    
+    func adaptiveHSpacing(base: BaseScreen = .width, _ value: CGFloat) -> CGFloat {
+        calculateResizing(base: base, value)
+    }
+    
+    func adaptiveVSpacing(base: BaseScreen = .height, _ value: CGFloat) -> CGFloat {
+        calculateResizing(base: base, value)
+    }
+    
+    func calculateResizing(base: BaseScreen = .height, _ value: CGFloat) -> CGFloat {
         if base == .width {
-            return (value * screenWidth) / standardWidth
+            return abs((value * screenWidth) / standardWidth)
         } else {
-            return (value * screenHeight) / standardHeight
+            return abs((value * screenHeight) / standardHeight)
         }
-        
     }
     
 }
