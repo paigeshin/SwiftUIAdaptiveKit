@@ -43,13 +43,17 @@ If you received a design based on the iphone 13 mini, do this.
 
 # Warning
 
-If you want to use this, you must initialize AdaptiveKit. Otherwise, unexpected behaviour will occur.
+If you want to use this, you must initialize AdaptiveKit. Otherwise, unexpected behaviour might occur. You can add additional argument `width` when you want to resize your screen based on width.
 
 # Examples
 
 ### `.adaptiveFontSize()`
 
-View Modifier proportionally resizing based on the height by default.
+Type: View Modifier 
+
+Base Default: height
+
+How it works: Proportionally resizing based on the height by default.
 
 ```swift
 Text("Hello")
@@ -64,7 +68,11 @@ Text("Hello")
 
 ### `adaptiveSpacing()`
 
-This is a function. Proportionally resizing based on the height by default. You can add additional argument `width` when you want to resize your screen based on width.
+Type: Function 
+
+Base Default: height
+
+How it works: Proportionally resizing based on the height by default.
 
 ```swift
     VStack(spacing: adaptiveSpacing(8)) {
@@ -78,7 +86,11 @@ This is a function. Proportionally resizing based on the height by default. You 
 
 ### `.adaptivePadding()`
 
-View Modifier proportionally resizing based on the height by default. You can add additional argument `width` when you want to resize your screen based on width.
+Type: View Modifier 
+
+Base Default: height
+
+How it works: Proportionally resizing based on the height by default.
 
 ```swift
     VStack {
@@ -90,7 +102,11 @@ View Modifier proportionally resizing based on the height by default. You can ad
 
 ### `.adaptiveLineSpacing()`
 
-View Modifier proportionally resizing based on the height by default. 
+Type: View Modifier 
+
+Base Default: height
+
+How it works: Proportionally resizing based on the height by default.
 
 ```swift
     Text("HelloWorld\nHelloWorld")
@@ -99,7 +115,11 @@ View Modifier proportionally resizing based on the height by default.
 
 ### `.adaptiveHeight()`
 
-View Modifier proportionally resizing based on the height. You can add additional argument `width` when you want to resize your screen based on width.
+Type: View Modifier 
+
+Base Default: height
+
+How it works: Proportionally resizing based on the height by default.
 
 ```swift
     VStack {
@@ -110,7 +130,11 @@ View Modifier proportionally resizing based on the height. You can add additiona
 
 ### `.adapativeWidth()`
 
-View Modifier proportionally resizing based on the width
+Type: View Modifier 
+
+Base Default: width
+
+How it works: Proportionally resizing based on the width by default.
 
 ```swift
     VStack {
@@ -121,7 +145,11 @@ View Modifier proportionally resizing based on the width
 
 ### `.adaptiveFrame()`
 
-View Modifier proportionally resizing based on the height. You can add additional argument `width` when you want to resize your screen based on width.
+Type: View Modifier 
+
+Base Default: width
+
+How it works: Proportionally resizing based on the height by default.
 
 ```swift
     VStack {
